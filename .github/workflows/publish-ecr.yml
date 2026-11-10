@@ -5,6 +5,9 @@ on:
     branches: [dev]
     paths:
       - .github/workflows/publish-ecr.yml
+      - Dockerfile
+      - Gemfile
+      - Gemfile.lock
   workflow_dispatch:
     inputs:
       image_tag:

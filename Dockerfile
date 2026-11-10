@@ -12,7 +12,12 @@ LABEL maintainer=$JUDGE0_MAINTAINER
 ENV PATH "/usr/local/ruby-2.7.0/bin:/opt/.gem/bin:$PATH"
 ENV GEM_HOME "/opt/.gem/"
 
-RUN apt-get update && \
+# The compiler image uses Debian Buster, whose signed packages are now archived.
+RUN sed -i \
+      -e 's|http://deb.debian.org/debian|https://archive.debian.org/debian|g' \
+      -e 's|http://security.debian.org/debian-security|https://archive.debian.org/debian-security|g' \
+      -e '/buster-updates/d' /etc/apt/sources.list && \
+    apt-get update && \
     apt-get install -y --no-install-recommends \
       cron \
       ca-certificates \
