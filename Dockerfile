@@ -15,6 +15,7 @@ ENV GEM_HOME "/opt/.gem/"
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       cron \
+      ca-certificates \
       libpq-dev \
       sudo && \
     rm -rf /var/lib/apt/lists/* && \
