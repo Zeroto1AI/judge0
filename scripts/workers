@@ -4,7 +4,7 @@
 # Usage: ./scripts/workers
 #
 source ./scripts/load-config
-export | sudo tee /api/environment
+export | sudo sh -c 'umask 077; cat > /api/environment'
 
 run_resque=1
 resque_pid=0
