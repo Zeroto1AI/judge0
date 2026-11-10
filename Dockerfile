@@ -21,12 +21,18 @@ RUN sed -i \
     apt-get install -y --no-install-recommends \
       cron \
       ca-certificates \
+      curl \
       libpq-dev \
       sudo && \
     rm -rf /var/lib/apt/lists/* && \
     echo "gem: --no-document" > /root/.gemrc && \
     gem install bundler:2.1.4 && \
     npm install -g --unsafe-perm aglio@2.3.0
+
+RUN curl --fail --silent --show-error --location \
+      https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem \
+      --output /etc/ssl/certs/aws-rds-global-bundle.pem && \
+    chmod 0644 /etc/ssl/certs/aws-rds-global-bundle.pem
 
 EXPOSE 2358
 
